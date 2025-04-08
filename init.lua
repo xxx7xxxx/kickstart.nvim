@@ -92,6 +92,8 @@ set_keymap('n', 'L', '$', opts)
 set_keymap('n', 'Y', 'y$', opts)
 set_keymap('n', '<C-e>', '2<C-e>', opts)
 set_keymap('n', '<C-y>', '2<C-y>', opts)
+set_keymap('n', '``', '<C-o>', opts)
+set_keymap('n', '<leader>d', vim.lsp.buf.definition, { desc = '[G]oto [D]efinition', noremap = true, silent = true })
 
 -- Buffer
 set_keymap('n', '<Up>', ':bp<cr>', opts)
@@ -390,7 +392,7 @@ require('lazy').setup({
       -- Document existing key chains
       spec = {
         { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
-        { '<leader>d', group = '[D]ocument' },
+        -- { '<leader>d', group = '[D]ocument' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
@@ -588,7 +590,7 @@ require('lazy').setup({
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          -- map('<leader>d', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
           -- Find references for the word under your cursor.
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -819,6 +821,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        go = { 'gofmt', 'goimports' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
